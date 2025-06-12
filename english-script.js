@@ -60,9 +60,7 @@ function flipCard(cardElement, letter) {
   cardElement.classList.toggle("flipped");
 
   // Play pronunciation using Google TTS
-  const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
-    letter
-  )}&tl=en&client=tw-ob`;
+  const url = `audio/${encodeURIComponent(letter)}.mp3`;
   const audio = new Audio(url);
   audio.play();
 }
