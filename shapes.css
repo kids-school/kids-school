@@ -1,0 +1,61 @@
+body {
+  background: linear-gradient(to right, #d9a7c7, #fffcdc);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  transition: background 0.3s ease;
+}
+
+.colorful-title {
+  font-size: 3rem;
+  color: #6c5ce7;
+  text-shadow: 2px 2px #ffeaa7;
+}
+
+.shape-box {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  background-color: #74b9ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.shape-box:hover {
+  transform: scale(1.1);
+}
+
+.shape-box.animate {
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.shape-circle {
+  border-radius: 50%;
+}
+
+.shape-triangle {
+  width: 0;
+  height: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+  border-bottom: 130px solid #e17055;
+  background-color: transparent !important;
+}
+
+.shape-star {
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Star_icon_stylized.svg/2048px-Star_icon_stylized.svg.png') no-repeat center/contain;
+  background-color: transparent !important;
+  color: transparent;
+}
