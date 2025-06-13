@@ -9,9 +9,13 @@ function flipCard(cardElement, letter) {
   // Toggle flip on clicked card
   cardElement.classList.toggle("flipped");
 
-  // Play sound using Google TTS
-  const text = encodeURIComponent(letter);
-  const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${text}&tl=bn&client=tw-ob`;
-  const audio = new Audio(url);
-  audio.play();
+  // Speak the letter using Google TTS (Bangla)
+  const encodedText = encodeURIComponent(letter);
+  const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=bn&client=tw-ob`;
+
+  // Play the audio
+  const audio = new Audio(ttsUrl);
+  audio.play().catch((e) => {
+    console.error("Audio playback failed:", e);
+  });
 }
