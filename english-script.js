@@ -1,3 +1,4 @@
+// Letter-to-emoji mapping
 const letters = {
   A: "🍎",
   B: "🐝",
@@ -29,25 +30,31 @@ const letters = {
 
 const container = document.getElementById("alphabet-cards");
 
-Object.entries(letters).forEach(([letter, emoji]) => {
-  const card = document.createElement("div");
-  card.className = "col";
-  card.innerHTML = `
-    <div class="flip-card" onclick="flipCard(this, '${letter}')">
-      <div class="flip-card-inner">
-        <div class="flip-card-front letter-card">
-          <div class="letter">${letter}</div>
-          <div class="emoji">${emoji}</div>
-        </div>
-        <div class="flip-card-back">
-          <div class="emoji-back">${emoji}</div>
+// Initialize and populate all cards
+function initCards() {
+  container.innerHTML = ""; // Clear previous cards if any
+
+  Object.entries(letters).forEach(([letter, emoji]) => {
+    const card = document.createElement("div");
+    card.className = "col";
+    card.innerHTML = `
+      <div class="flip-card" onclick="flipCard(this, '${letter}')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front letter-card">
+            <div class="letter">${letter}</div>
+            <div class="emoji">${emoji}</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="emoji-back">${emoji}</div>
+          </div>
         </div>
       </div>
-    </div>
-  `;
-  container.appendChild(card);
-});
+    `;
+    container.appendChild(card);
+  });
+}
 
+// Flip the clicked card and play sound
 function flipCard(cardElement, letter) {
   // Unflip all other cards
   document.querySelectorAll(".flip-card").forEach((card) => {
@@ -56,11 +63,25 @@ function flipCard(cardElement, letter) {
     }
   });
 
-  // Toggle flip on clicked card
+  // Flip clicked card
   cardElement.classList.toggle("flipped");
 
-  // Play pronunciation using Google TTS
-  const url = `audio/Letters_En/${encodeURIComponent(letter)}.mp3`;
-  const audio = new Audio(url);
-  audio.play();
+  // Play pronunciation from audio folder
+  const audio = new Audio(`audio/Letters_En/${encodeURIComponent(letter)}.mp3`);
+  audio
+    .play()
+    .catch((err) => console.warn(`Audio load failed: ${err.message}`));
 }
+
+// Reload all cards (can be linked to a Reload button)
+function reloadCards() {
+  initCards();
+}
+
+// Go back to the previous page
+function goBack() {
+  history.back();
+}
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", initCards);
